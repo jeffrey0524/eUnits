@@ -1,0 +1,11 @@
+import edu.fcps.karel2.Display;
+import edu.fcps.Digit;
+
+public class Lab11 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		new one(1,9).display();
+	}
+
+}

@@ -1,0 +1,12 @@
+import edu.fcps.Digit;
+
+public class one extends Digit {
+
+	public one(int x, int y) {
+		super(x, y);
+		// TODO Auto-generated constructor stub
+	}
+	public void display() {
+		
+	}
+}

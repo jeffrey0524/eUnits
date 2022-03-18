@@ -1,0 +1,25 @@
+
+public class Democrat extends MazeEscaper2 {
+
+	public Democrat() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Democrat(int x, int y, int dir, int beepers) {
+		super(x, y, dir, beepers);
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void walkDownCurrentSegment() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void turnToTheNextSegment() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,39 @@
+
+public class Dorothy extends Athlete {
+
+	public Dorothy() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Dorothy(int x, int y, int dir, int beepers) {
+		super(x, y, dir, beepers);
+		// TODO Auto-generated constructor stub
+	}
+
+	public boolean findPath() {
+		turnleft();
+		move();
+		if(nextToABeeper()) {
+			return true;
+		}
+		turnAround();
+		move();
+		move();
+		move();
+		if(nextToABeeper()) {
+			return true;
+		}
+		turnAround();
+		move();
+		turnRight();
+		return false;
+	}
+	 public void fllowPath() {
+		 while(nextToABeeper()) {
+			 move();
+		 }
+		 turnAround();
+		 move();
+		 turnAround();
+	 }
+}

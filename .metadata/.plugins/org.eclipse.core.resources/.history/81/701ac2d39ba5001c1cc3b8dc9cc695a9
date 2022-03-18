@@ -1,0 +1,17 @@
+
+public class linedancer extends Dancer {
+
+	@Override
+	public void danceStep() {
+		// TODO Auto-generated method stub
+		move();
+		  move();
+		  turnLeft();
+		  turnLeft();
+		  move();
+		  move();
+		  turnLeft();
+		  turnLeft();
+	}
+
+}
