@@ -12,7 +12,7 @@ public class Lab19 {
             null, JOptionPane.QUESTION_MESSAGE, new ImageIcon(), maps, maps[0]);
       Display.openWorld("maps/"+filename+".map");
       Display.setSize(10,10);
-      Display.setSpeed(10);
+      Display.setSpeed(8);
    
       Dorothy p1 = new Dorothy(2,2);
       
