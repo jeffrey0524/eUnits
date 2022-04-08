@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Panel01 extends JPanel {
-	public void paintComponent(Graphics g) {
+	protected void paintComponent(Graphics g) {
 		//空長方形g.drawRect(50, 50, 400, 75);
 		//正方形g.fillRect(500, 50, 200, 200);
 		//空橢圓g.drawOval(200, 200, 20, 80);
@@ -23,6 +23,7 @@ public class Panel01 extends JPanel {
 			g.drawPolyline(xxPoints, yyPoints,3);
 		 */
 		g.setColor(Color.WHITE);
+		g.setFont(new Font("Serif",3,30));
 		g.drawString("Welcome Home",40,40);
 		g.fillOval(300, 75, 50, 50);
 		g.setColor(Color.black);
