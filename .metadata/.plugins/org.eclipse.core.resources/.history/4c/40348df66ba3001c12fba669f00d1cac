@@ -1,9 +1,0 @@
-
-public class one extends Digit {
-
-	public one() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-}

@@ -1,0 +1,7 @@
+package Lab01;
+
+import JPanel;
+
+public class Panel01 extends JPanel {
+
+}
