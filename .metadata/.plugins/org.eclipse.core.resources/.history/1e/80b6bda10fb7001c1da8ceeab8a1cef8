@@ -1,6 +1,0 @@
-package Lab02;
-
-public class Panel02 extends JPanel {
-	
-	ImageIcon thomas = new ImageIcon("tj.jpg");
-}
