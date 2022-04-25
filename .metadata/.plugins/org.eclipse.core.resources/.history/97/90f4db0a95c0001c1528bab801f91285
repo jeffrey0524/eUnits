@@ -1,0 +1,24 @@
+package Lab08;
+
+	//Name______________________________ Date_____________
+   import edu.fcps.Turtle;
+   import java.awt.Color;
+   import javax.swing.*;
+
+import Lab07.PolygonTurtle;
+   public class Driver08
+   {
+      public static void main(String[] args)
+      {
+    	  /**/
+    	  FlowerTurtle a = new FlowerTurtle();
+    	  FlowerTurtle b = new FlowerTurtle();
+    	  
+    	  a.setSize(25.0);
+    	  a.setColor(Color.BLUE);
+    	  a.drawShape();
+    	  
+    	  b.drawShape();
+    	  /**/
+      }
+   }

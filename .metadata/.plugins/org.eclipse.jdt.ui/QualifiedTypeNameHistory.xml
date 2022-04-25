@@ -2,7 +2,7 @@
 <qualifiedTypeNameHistroy>
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="edu.fcps.Digit"/>
-    <fullyQualifiedTypeName name="edu.fcps.karel2.Display"/>
     <fullyQualifiedTypeName name="javax.swing.JPanel"/>
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
+    <fullyQualifiedTypeName name="edu.fcps.karel2.Display"/>
 </qualifiedTypeNameHistroy>

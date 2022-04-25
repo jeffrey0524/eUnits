@@ -1,3 +1,5 @@
+package Lab08;
+
 	//Name______________________________ Date_____________
    import edu.fcps.Turtle;
    import java.awt.Color;
@@ -27,21 +29,35 @@
       private void drawPetals() //starts and ends at center facing north
       {
       
-         /************************/
-      	/*                      */
-      	/* Your code goes here. */
-      	/*                      */
-      	/************************/
+         /**/
+    	  for(int j=1;j<=3600;j+=1800/mySize) {
+   		   forward(40);
+   		   turnLeft(180);
+   		   forward(40);
+   		   turnLeft(1800/mySize/10);
+  		  }
+      	/**/
       
       }
       private void drawStem() //starts at top of stem facing south, ends at bottom
       {
       
-         /************************/
-      	/*                      */
-      	/* Your code goes here. */
-      	/*                      */
-      	/************************/
+         /**/
+    	  myColor=Color.GREEN;
+  		  turnLeft(180);
+  		  forward(60);
+  		  turnLeft(120);
+  		  forward(40);
+  		  turnLeft(180);
+  		  forward(40);
+  		  turnLeft(300);
+  		  forward(20);
+  		  turnLeft(180);
+  		  forward(20);
+  		  turnLeft(300);
+  		  forward(60);
+
+      	/**/
       
       }
       public void drawShape()

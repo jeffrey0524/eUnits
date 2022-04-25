@@ -1,0 +1,18 @@
+package Lab09;
+
+import edu.fcps.Turtle;
+
+public class TwistyTurtles3 extends Turtle {
+	
+	public TwistyTurtles3() {
+		super();
+	}
+	 
+	public void drawShape() {
+		for(int i=5;i<=400;i+=10) {
+			forward(i);
+			turnLeft(123);
+		}
+	}
+
+}
