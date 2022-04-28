@@ -1,3 +1,5 @@
+package Lab11;
+
 //Name:              Date:
    import java.awt.*;
     public class Ball extends Polkadot
@@ -49,7 +51,22 @@
             setX(rightEdge - getRadius());
             dx = dx * -1; 
          }
-         else if 
+         else if(getX() <= rightEdge-400 + getRadius())     //hits the right edge
+         {
+            setX(rightEdge-400 + getRadius());
+            dx = dx * -1; 
+         }
+         
+         setY(getY()+ dy);  
+         if (getY() >= bottomEdge - getRadius()){
+        	 setY(bottomEdge - getRadius());
+             dy = dy *-1; 
+         }
+         else if(getY() <= bottomEdge-400 + getRadius())     //hits the right edge
+         {
+            setY(bottomEdge-400 + getRadius());
+            dy = dy * -1; 
+         }
          
       }
    }

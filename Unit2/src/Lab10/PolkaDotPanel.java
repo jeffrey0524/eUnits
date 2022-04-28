@@ -1,3 +1,5 @@
+package Lab10;
+
    //Torbert, e-mail: mr@torbert.com, website: www.mr.torbert.com
 	//version 6.17.2003
 
@@ -34,9 +36,9 @@
       {
           public void actionPerformed(ActionEvent e)
          {
-         /**************************
-            your code goes here
-         **************************/
+         /**/
+        	  
+         /**/
             pd.jump(FRAME, FRAME);
             pd.draw(myBuffer);
             
