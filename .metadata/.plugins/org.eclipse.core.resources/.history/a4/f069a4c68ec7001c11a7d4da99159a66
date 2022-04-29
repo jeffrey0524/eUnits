@@ -27,8 +27,6 @@ package Lab10;
          
          pd = new Polkadot();
          pd2 = new Polkadot();
-         pd2.setColor(Color.green);
-         pd2.setRadius(20);
          
          t = new Timer(1000, new Listener());
          t.start();

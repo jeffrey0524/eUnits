@@ -50,10 +50,7 @@ import java.awt.image.*;
     	   myBuffer.setColor(Color.green.darker());
     	   myBuffer.fillRect(xPos+3, yPos+80, 10, 10);
     	   myBuffer.fillRect(xPos+23, yPos+80, 10, 10);
-    	   myBuffer.fillRect(xPos+17, yPos+90, 10, 20);
-    	   myBuffer.fillRect(xPos+7, yPos+100, 10, 20);
-    	   myBuffer.fillRect(xPos+27, yPos+100, 10, 20);
-
+    	   myBuffer.fillRect(xPos+13, yPos+90, 10, 20);
     	   //myBuffer.drawPolyline(xPoints, yPoints, 10);
     	   if(xPos==200) {
     		   myBuffer.setColor(Color.BLACK);
