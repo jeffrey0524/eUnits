@@ -34,6 +34,7 @@ package Lab11;
       {
          g.drawImage(myImage, 0, 0, getWidth(), getHeight(), null);
       }
+       
        private class Listener implements ActionListener
       {
           public void actionPerformed(ActionEvent e)

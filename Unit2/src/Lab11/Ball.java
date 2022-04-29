@@ -57,7 +57,7 @@ package Lab11;
             dx = dx * -1; 
          }
          
-         setY(getY()+ dy);  
+         setY(getY()+ dy); 
          if (getY() >= bottomEdge - getRadius()){
         	 setY(bottomEdge - getRadius());
              dy = dy *-1; 

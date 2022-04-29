@@ -1,0 +1,46 @@
+package Lab13;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.*;
+ public class ProjectPanel extends JPanel
+{
+//constants
+   private static final int FRAME = 400;   
+   private static final Color BACKGROUND = new Color(204, 204, 204);
+//fields
+   private BufferedImage myImage;
+   private Graphics myBuffer;
+   private Timer t1;
+   private Timer t2;
+   private int xPos, yPos;
+   
+    public ProjectPanel(){
+    	xPos=50;
+    	
+      myImage =  new BufferedImage(700, 500, BufferedImage.TYPE_INT_RGB);
+      myBuffer = (Graphics2D)myImage.getGraphics();
+     
+      t1 = new Timer(100, new Listener());
+      t1.start();
+      t2 = new Timer(100, new Listener());
+   }
+    
+    public void paintComponent(Graphics g){
+      g.drawImage(myImage, 0, 0, getWidth(), getHeight(), null);
+   }
+    
+    private class Listener implements ActionListener{
+       public void actionPerformed(ActionEvent e){
+    	   int xPoints[]= {xPos};
+    	   myBuffer.setColor(Color.pink);
+    	   myBuffer.fillRect(0, 0, 700, 360);
+    	   myBuffer.drawImage(THOMAS.getImage(), xPos-40, 50, 75, 125, null);
+    	   
+    	   
+         repaint();
+      }
+   }
+    
+}
