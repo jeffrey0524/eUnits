@@ -5,4 +5,6 @@
     <fullyQualifiedTypeName name="javax.swing.JPanel"/>
     <fullyQualifiedTypeName name="javax.swing.ImageIcon"/>
     <fullyQualifiedTypeName name="edu.fcps.karel2.Display"/>
+    <fullyQualifiedTypeName name="Lab11.Ball"/>
+    <fullyQualifiedTypeName name="Lab11.Polkadot"/>
 </qualifiedTypeNameHistroy>

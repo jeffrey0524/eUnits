@@ -1,7 +1,0 @@
-package Lab13;
-
-import java.awt.Container;
-
-public class ProjectPanel extends Container {
-
-}

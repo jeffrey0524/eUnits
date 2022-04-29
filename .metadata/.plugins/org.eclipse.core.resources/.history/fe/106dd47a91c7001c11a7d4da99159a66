@@ -18,7 +18,6 @@ package Lab08;
          super(x, 300.0, 90.0);
          mySize = n;
          myColor = c;
-         setColor(myColor);
       }
       public void setSize(double n)
       {
@@ -46,7 +45,7 @@ package Lab08;
       {
       
          /**/
-    	  setColor(Color.black);
+    	  myColor=Color.GREEN;
   		  turnLeft(180);
   		  forward(60);
   		  turnLeft(120);

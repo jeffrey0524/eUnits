@@ -46,7 +46,7 @@ package Lab08;
       {
       
          /**/
-    	  setColor(Color.black);
+    	  setColor(Color.GREEN);
   		  turnLeft(180);
   		  forward(60);
   		  turnLeft(120);
