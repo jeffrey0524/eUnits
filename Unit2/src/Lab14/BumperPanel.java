@@ -1,7 +1,10 @@
+package Lab14;
+
 	// Phil Ero 15JUL08
 	
    import javax.swing.*;
-   import java.awt.*;
+
+import java.awt.*;
    import java.awt.event.*;
    import java.awt.image.*;
    
@@ -30,20 +33,31 @@
          myImage =  new BufferedImage(FRAME, FRAME, BufferedImage.TYPE_INT_RGB);
          myBuffer = myImage.getGraphics();
          
+         myBuffer.setColor(BACKGROUND);
+         myBuffer.fillRect(0, 0, FRAME,FRAME);
          // create ball and jump
-      
+         int xPos = (int)(Math.random()*(FRAME-100) + 50);
+         int yPos = (int)(Math.random()*(FRAME-100)+ 50);
+         ball = new Ball(xPos, yPos, BALL_DIAM, BALL_COLOR,20,20);
       
          // create prize and jump
-      
+         xPos = (int)(Math.random()*(FRAME-100) + 50);
+         yPos = (int)(Math.random()*(FRAME-100)+ 50);
+         prize= new Polkadot(xPos,yPos,PRIZE_DIAM,PRIZE_COLOR);
             
          // create bumper and jump
-      
+         xPos = (int)(Math.random()*(FRAME-BUMPER_X_WIDTH));
+         yPos = (int)(Math.random()*(FRAME-BUMPER_Y_WIDTH));
+         bumper = new Bumper(xPos,yPos,BUMPER_X_WIDTH,BUMPER_Y_WIDTH,BUMPER_COLOR);
       	
          // ensure ball is outside the bumper
-      
-        
+         while(bumper.inBumper(ball)){
+        	 ball.jump(FRAME, FRAME);
+         }
       	// ensure prize is outside the bumper
-      
+         while(bumper.inBumper(prize)){
+        	 prize.jump(FRAME, FRAME);
+         }
       
          hits = 0;
          timer = new Timer(5, new Listener());
@@ -62,6 +76,7 @@
             // clear buffer and move ball
             myBuffer.setColor(BACKGROUND);
             myBuffer.fillRect(0,0,FRAME,FRAME); 
+            
             ball.move(FRAME, FRAME);
             
             // check for collisions

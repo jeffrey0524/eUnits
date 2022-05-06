@@ -1,3 +1,5 @@
+package Lab15;
+
    //Torbert, e-mail: mr@torbert.com, website: www.mr.torbert.com
 	//version 6.17.2003
 
@@ -19,14 +21,14 @@
          myImage =  new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
          myBuffer = myImage.getGraphics();
          myArray = new ImageIcon[4];
-         myArray[0] = new ImageIcon("karele.gif");   //east
-         myArray[1] = new ImageIcon("kareln.gif");   //north
-         myArray[2] = new ImageIcon("karelw.gif");   //west
-         myArray[3] = new ImageIcon("karels.gif");   //south
+         myArray[0] = new ImageIcon("src\\Lab15\\karele.gif");   //east
+         myArray[1] = new ImageIcon("src\\\\Lab15\\\\kareln.gif");   //north
+         myArray[2] = new ImageIcon("src\\\\Lab15\\\\karelw.gif");   //west
+         myArray[3] = new ImageIcon("src\\\\Lab15\\\\karels.gif");   //south
          dir = 0;     //start facing east
          xPos = 5;    //starting xPos
          yPos = HEIGHT - 3 - myArray[dir].getImage().getHeight(null); //starting yPos
-         Timer t = new Timer(250, new Listener());
+         Timer t = new Timer(100, new Listener());
          t.start();
       }
        public void paintComponent(Graphics g)
@@ -39,14 +41,15 @@
          {
             myBuffer.setColor(BACKGROUND);
             myBuffer.fillRect(0, 0, WIDTH, HEIGHT);
+            
             myBuffer.setColor(Color.red);
             for(int x = 17; x < WIDTH; x += 30) //vertical lines
             {
-               myBuffer.drawLine(/*     */);
+               myBuffer.drawLine(x,0,x,HEIGHT);
             }
             for(int y = 9; y < HEIGHT; y += 28) //horizontal lines
             {
-               myBuffer.drawLine(/*     */);
+               myBuffer.drawLine(0,y,WIDTH,y);
             }
             myBuffer.fillRect(107, 121, 180, 56);
             myBuffer.setColor(Color.black);
@@ -59,6 +62,44 @@
          	The dir controls which image to use.
          	*************************************/
             myBuffer.drawImage(myArray[dir].getImage(), xPos, yPos, null);
+            switch(dir) {
+            	case 0:
+            		if(xPos<WIDTH-50) {
+            			xPos+=20;
+            		}else {
+            			dir=1;
+            			xPos=360;
+            			yPos=360;
+            		}
+            		break;
+            	case 1:
+            		if(yPos>0) {
+            			yPos-=20;
+            		}else {
+            			dir=2;
+            			xPos=360;
+            			yPos=0;
+            		}
+            		break;
+            	case 2:
+            		if(xPos > 17) {
+            			xPos-=20;
+            		}else {
+            			dir=3;
+            			xPos=0;
+            			yPos=0;
+            		}
+            		break;
+            	case 3:
+            		if(yPos < HEIGHT-50) {
+            			yPos+=20;
+            		}else {
+            			dir=0;
+            			xPos=0;
+            			yPos=360;
+            		}
+            		break;
+            }
             
             repaint();
          }
