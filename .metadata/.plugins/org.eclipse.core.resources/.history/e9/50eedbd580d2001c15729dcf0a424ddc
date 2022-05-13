@@ -1,0 +1,7 @@
+package Lab20;
+
+import java.awt.Container;
+
+public class PrizePanel extends Container {
+
+}

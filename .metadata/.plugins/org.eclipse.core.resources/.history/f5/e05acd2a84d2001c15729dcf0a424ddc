@@ -1,0 +1,26 @@
+package Lab20;
+
+import java.awt.Color;
+
+public class Pinball extends Spot {
+	private int dx;
+	private int dy;
+	private int rightEdge;
+	private int bottomEdge;
+	
+	public Pinball() {
+		super(200,200,10,Color.black);
+		dx=(int)Math.random() * 12 - 6;
+		dy=(int)Math.random() * 12 - 6;
+		rightEdge=800;
+		bottomEdge=800;
+	}
+	 public Pinball(double x, double y, double dia, Color c)
+     {
+        super(x, y, dia, c);
+        dx = (int)Math.random()* 12 - 6;
+        dy = (int)Math.random() * 12 - 6;
+     }
+
+
+}
