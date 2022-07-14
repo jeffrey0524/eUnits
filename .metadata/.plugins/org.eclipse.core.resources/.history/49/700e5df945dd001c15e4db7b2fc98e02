@@ -1,0 +1,403 @@
+package Final;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+public class Panel extends JPanel implements ActionListener{
+ 
+ //設定活動（視窗）邊界
+    private int Panel_Width = 600;
+    private int Panel_Height = 600;
+    
+    private int Body_Size = 50;
+    private int Body_Total = 900;
+    
+    //移動速度，單位毫秒
+    private int Speed = 140;
+
+    private int x[] = new int[Body_Total];
+    private int y[] = new int[Body_Total];
+
+    private int body_tmp = 4;
+    private int apple_x;
+    private int apple_y;
+
+    //預設起始位置朝右邊
+    private boolean upDirection = false;
+    private boolean downDirection = false;
+    private boolean leftDirection = false;
+    private boolean rightDirection = true;
+    
+    //判斷是否 game over
+    private boolean inGame = false;
+    private boolean Gamestart = false;
+    private boolean Gamepause = false;
+
+    private Timer timer;
+    private Image body_img;
+    private Image apple_img;
+    private Image head_img;
+    private Image gress_img;
+
+    private panaladd panaladd;
+    private int difficulty = 1;
+    public int hits = 0;
+    private float atime;
+    
+    public Panel() {
+        addKeyListener(new Key_Detect());
+        setBackground(Color.black);
+        setFocusable(true);
+        //setSize 跟 setPreferredSize 網路上說好像有差
+        setPreferredSize(new Dimension(Panel_Width, Panel_Height));
+        loadImages();
+        
+        timer = new Timer(Speed, this);
+        initGame();
+    }
+
+    private void loadImages() {
+        ImageIcon b = new ImageIcon("src/Final/resources/body.png");
+        body_img = b.getImage();
+
+        ImageIcon a = new ImageIcon("src/Final/resources/apple.png");
+        apple_img = a.getImage();
+
+        ImageIcon h = new ImageIcon("src/Final/resources/head.png");
+        head_img = h.getImage();
+        
+        ImageIcon c = new ImageIcon("src/Final/resources/gress.jpg");
+        gress_img = c.getImage();
+    }
+
+    private void initGame() {
+    	//身體節數（這可以未來開發難易度調整，跟速度一樣）
+    	//移動速度
+		Speed = 140;
+		inGame = false;
+        Gamestart = false;
+        Gamepause = false;
+        difficultyset();
+		atime = 300;
+		hits=0;
+		
+        for (int z = 0; z < body_tmp; z++) {
+            x[z] = Panel_Width/2 - z * 10;
+            y[z] = Panel_Height/2;
+        }
+        
+        //放置第一顆蘋果
+        locateapple();
+        //ActionListener listener就是這個class
+        timer.setDelay(Speed);
+        timer.start();
+    }
+    
+    //整個遊戲進行主枝幹
+    	@Override
+    	public void actionPerformed(ActionEvent e) {
+
+        	repaint();
+    	}
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        doDrawing(g);
+    }
+    
+    //畫圖
+    private void doDrawing(Graphics g) {
+    	//匯入宣仁的class
+    	panaladd = new panaladd(g,Panel_Width, Panel_Height);
+    	//畫開始畫面
+        if(Gamestart==false) {
+        	//繪製畫面
+        	//g.drawImage(gress_img, 0, 0, this);
+			panaladd.startimg();
+			//寫出難度與標題與計時，時間到自動開始遊戲
+			panaladd.printdif(difficulty);
+			difficultyset();
+        }else {
+        	inGame = true;
+        	Gamestart = true;
+        }
+        //遊戲判斷
+        if(Gamepause == true) {
+        	panaladd.pauseimg();
+        }else {
+        if (inGame == true) {
+        	checkapple();//檢查吃到蘋果了沒
+        	checkCollision();//有沒有碰撞到邊界
+            move();
+        }
+        //如果還在遊戲裡面
+        if (Gamestart==true && inGame==true && atime> 0) {
+        	g.drawImage(gress_img, 0, 0,Panel_Width,Panel_Height,null);
+            g.drawImage(apple_img, apple_x, apple_y, this);
+            for (int z = 0; z < body_tmp; z++) {
+             //先畫出頭
+                if (z == 0) {
+                    g.drawImage(head_img, x[z], y[z], this);
+                } else {
+                //在畫出身體
+                    g.drawImage(body_img, x[z], y[z], this);
+                }
+            }
+            
+            g.setColor(Color.white);
+    		g.setFont(new Font("Monospaced",Font.BOLD,24));
+    		g.drawString(((int)atime/10) + "s",Panel_Width-50,Panel_Height-50 );
+		    atime -= Speed/100;
+        }
+        if (Gamestart==true && inGame==false || atime<= 0){
+            gameOver(g);
+        }
+        }
+    }
+
+    //遊戲結束畫面
+    private void gameOver(Graphics g) {
+        String msg = "Game Over";
+        Font small = new Font("Roboto", Font.BOLD, 24);
+        FontMetrics metr = getFontMetrics(small);
+        
+        g.drawImage(gress_img, 0, 0,Panel_Width,Panel_Height,null);
+        g.setColor(Color.red);
+    	g.fillRect(0,Panel_Height/2-100,Panel_Width,200);
+    	
+        g.setColor(Color.black);
+        g.setFont(small);
+        g.drawString(msg, (Panel_Width- metr.stringWidth(msg)) / 2 , Panel_Height / 2);
+        
+        g.setColor(Color.black);
+        g.setFont(new Font("Monospaced", Font.BOLD, 24));
+        g.drawString("最終分數: " + hits, Panel_Width/2-60, Panel_Height/2+50);
+        
+        g.setColor(Color.white);
+        g.setFont(new Font("Monospaced",Font.BOLD,24));
+        g.drawString("Press R to restart", Panel_Width/2-80, Panel_Height-100);
+        timer.stop();
+    }
+    
+    //檢查頻果接觸
+    private void checkapple() {
+        if ((x[0] == apple_x) && (y[0] == apple_y)) {
+            body_tmp++;
+            locateapple();
+            hits+=1;
+            //吃到蘋果會加速
+            Speed-=5;
+            timer.setDelay(Speed);
+        }
+        for(int i=0;i<body_tmp;i++) {
+        	if ((x[i] == apple_x) && (y[i] == apple_y)) {
+                locateapple();
+            }
+        }
+    }
+
+    private void move() {
+        for (int z = body_tmp; z > 0; z--) {
+            x[z] = x[(z - 1)];
+            y[z] = y[(z - 1)];
+        }
+        if (leftDirection) {
+            x[0] -= Body_Size;
+        }
+        if (rightDirection) {
+            x[0] += Body_Size;
+        }
+        if (upDirection) {
+            y[0] -= Body_Size;
+        }
+        if (downDirection) {
+            y[0] += Body_Size;
+        }
+    }
+
+    //碰撞判斷（遊戲結束判斷）
+    private void checkCollision() {
+     //有沒有咬到自己
+        for (int z = body_tmp; z > 0; z--) {
+            if ((x[0] == x[z]) && (y[0] == y[z])) {
+                inGame = false;
+            }
+        }
+        //有沒有超出邊界
+        if (y[0] >= Panel_Height) {
+            inGame = false;
+        }
+        if (y[0] < 0) {
+            inGame = false;
+        }
+        if (x[0] >= Panel_Width) {
+            inGame = false;
+        }
+        if (x[0] < 0) {
+            inGame = false;
+        }
+        if (!inGame) {
+            timer.stop();
+        }
+    }
+    
+    //依照身體長度結合隨機變數，將整個畫面分割成Body_Size的小正方型，再讓蘋果生出來
+    //附加 蘋果不會生在邊邊
+    private void locateapple() {
+        int r = (int) (Math.random()%12 * ((Panel_Width/Body_Size)-2)+1);
+        apple_x = r * Body_Size;
+
+        r = (int) (Math.random()%12 * ((Panel_Height/Body_Size)-2)+1);
+        apple_y = r * Body_Size;
+    }
+    
+    //鍵盤偵測
+    private class Key_Detect extends KeyAdapter {
+        @Override
+        public void keyPressed(KeyEvent e) {
+
+            int key = e.getKeyCode();
+
+            if ((key == KeyEvent.VK_LEFT) && (!rightDirection)) {
+                leftDirection = true;
+                upDirection = false;
+                downDirection = false;
+            }
+
+            if ((key == KeyEvent.VK_RIGHT) && (!leftDirection)) {
+                rightDirection = true;
+                upDirection = false;
+                downDirection = false;
+            }
+
+            if ((key == KeyEvent.VK_UP) && (!downDirection)) {
+                upDirection = true;
+                rightDirection = false;
+                leftDirection = false;
+            }
+
+            if ((key == KeyEvent.VK_DOWN) && (!upDirection)) {
+                downDirection = true;
+                rightDirection = false;
+                leftDirection = false;
+            }
+            
+            if(key == KeyEvent.VK_ENTER) {
+            	Gamestart = true;
+            	Gamepause = false;
+            }
+            if(key == KeyEvent.VK_ESCAPE) {
+            	Gamepause = true;
+            }
+            if(key == KeyEvent.VK_R) {
+        		initGame();
+            }
+            if(key == KeyEvent.VK_1) {
+            	difficulty = 1;
+            }else if(key == KeyEvent.VK_2) {
+            	difficulty = 2;
+            }else if(key == KeyEvent.VK_3) {
+            	difficulty = 3;
+            }
+        }
+    }
+    private void difficultyset() {
+    	if(difficulty==1) {
+    		body_tmp = 4;
+    		Speed=140;
+            timer.setDelay(Speed);
+    	}else if(difficulty==2) {
+    		body_tmp = 5;
+    		Speed=120;
+            timer.setDelay(Speed);
+    	}else if(difficulty==3) {
+    		body_tmp = 7;
+    		Speed=100;
+            timer.setDelay(Speed);
+    	}
+    }
+    	
+    public class panaladd {
+    	public int hits =0; 
+    	public Graphics myBuffer;
+    	private int FRAMEr;
+    	private int FRAMEd;
+    	
+    	public panaladd() {
+    		super();
+    		// TODO Auto-generated constructor stub
+    	}
+    	
+		public panaladd(Graphics g,int r,int b) {
+    		super();
+    		myBuffer = g;
+    		FRAMEr=r;
+    		FRAMEd=b;
+    	}
+    	public void startimg()
+        {
+    	  myBuffer.drawImage(gress_img, 0, 0,FRAMEr,FRAMEd,null);
+      	  myBuffer.setColor(Color.yellow);
+      	  myBuffer.fillRect(0,FRAMEd/2-100,FRAMEr,200);
+      	  myBuffer.setColor(Color.white);
+    	  myBuffer.fillRect(FRAMEr/2-100,FRAMEd/2-40,200,80);
+    	    
+    	  myBuffer.setColor(Color.CYAN);
+          myBuffer.setFont(new Font("Monospaced",Font.BOLD,50));
+          myBuffer.drawString("自己的故事自己吃", FRAMEr/2-200, 100);
+          
+      	  myBuffer.setColor(Color.black);
+          myBuffer.setFont(new Font("Monospaced",Font.BOLD,24));
+          myBuffer.drawString("GAME START", FRAMEr/2-75, FRAMEd/2+10);
+          
+          myBuffer.setColor(Color.white);
+          myBuffer.setFont(new Font("Monospaced",Font.BOLD,24));
+          myBuffer.drawString("Press enter to start", FRAMEr/2-85, FRAMEd-100);
+        }
+    	public void pauseimg()
+        {
+    	  myBuffer.drawImage(gress_img, 0, 0,FRAMEr,FRAMEd,null);
+      	  myBuffer.setColor(Color.blue);
+      	  myBuffer.fillRect(FRAMEr/2-175,FRAMEd/2-175,350,350);
+    	  
+      	  myBuffer.setColor(Color.black);
+          myBuffer.setFont(new Font("Monospaced",Font.BOLD,24));
+          myBuffer.drawString("GAME PAUSE", FRAMEr/2-75, FRAMEd/2-150);
+          
+          myBuffer.setColor(Color.white);
+    	  myBuffer.fillRect(FRAMEr/2-100,FRAMEd/2-130,180,70);
+    	  
+          myBuffer.setColor(Color.black);
+          myBuffer.setFont(new Font("Monospaced",Font.BOLD,24));
+          myBuffer.drawString("Press enter to resume", FRAMEr/2-85, FRAMEd/2+100);
+          
+          myBuffer.setColor(Color.white);
+    	  myBuffer.fillRect(FRAMEr/2-100,FRAMEd/2,200,80);
+    	  
+          myBuffer.setColor(Color.black);
+          myBuffer.setFont(new Font("Monospaced",Font.BOLD,24));
+          myBuffer.drawString("Press R to restart", FRAMEr/2-85, FRAMEd/2+100);
+        }
+    	public void printdif(int dif)
+        {
+    		myBuffer.setColor(Color.black);
+            myBuffer.setFont(new Font("Monospaced",Font.BOLD,20));
+            myBuffer.drawString("按1,2,3可選取難度", 10, FRAMEr-50);
+      	  myBuffer.setColor(Color.black);
+          myBuffer.setFont(new Font("Monospaced",Font.BOLD,20));
+          myBuffer.drawString("現在難度:" + dif, 10, FRAMEr-30);
+        }
+    }
+}

@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
-		<item key="selection" value="player1"/>
+		<item key="selection" value="difficulty"/>
 		<item key="wrap" value="true"/>
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="difficulty"/>
+			<item value="entergamestart"/>
+			<item value="GameEnd"/>
+			<item value="inGame"/>
 			<item value="athena"/>
 		</list>
 		<list key="replacehistory">
+			<item value="inGame"/>
+			<item value="GameEnd"/>
 			<item value="player1"/>
 		</list>
 	</section>

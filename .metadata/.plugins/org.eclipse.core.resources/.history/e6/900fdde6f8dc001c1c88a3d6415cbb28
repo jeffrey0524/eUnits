@@ -1,0 +1,10 @@
+package Final;
+
+import java.awt.Graphics;
+
+public class panaladd {
+	public void paintComponent(Graphics g)
+    {
+  	   
+    }
+}

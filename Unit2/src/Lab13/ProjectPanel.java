@@ -24,7 +24,7 @@ import java.awt.image.*;
      
       t1 = new Timer(100, new Listener());
       t1.start();
-      t2 = new Timer(8000, new Listener2());
+      t2 = new Timer(4000, new Listener2());
    }
     
     public void paintComponent(Graphics g){

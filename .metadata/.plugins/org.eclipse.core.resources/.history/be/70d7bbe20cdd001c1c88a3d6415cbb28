@@ -1,0 +1,43 @@
+package Final;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+
+public class panaladd {
+	
+	public int hits =0; 
+	public Graphics myBuffer;
+	public panaladd() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public panaladd(Graphics g) {
+		super();
+		myBuffer = g;
+		
+	}
+	
+	public void startimg(int FRAMEr,int FRAMEd)
+    {
+		myBuffer.setColor(Color.blue);
+  	    myBuffer.fillRect(0,0,FRAMEr,FRAMEd);
+  	    myBuffer.setColor(Color.yellow);
+  	    myBuffer.fillRect(0,FRAMEd/2-100,FRAMEr,200);
+  	  myBuffer.setColor(Color.white);
+	   myBuffer.fillRect(FRAMEr/2-100,FRAMEd/2-40,200,80);
+	    
+  	  myBuffer.setColor(Color.black);
+      myBuffer.setFont(new Font("Monospaced",Font.BOLD,24));
+      myBuffer.drawString("GAME START", FRAMEr/2-75, FRAMEd/2+10);
+      
+      myBuffer.setColor(Color.white);
+      myBuffer.setFont(new Font("Monospaced",Font.BOLD,24));
+      myBuffer.drawString("Press enter to start", FRAMEr/2, FRAMEd-100);
+    }
+	public void hitsup()
+    {
+		hits+=1;
+    }
+	
+}

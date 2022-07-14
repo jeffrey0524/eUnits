@@ -7,4 +7,6 @@
     <fullyQualifiedTypeName name="edu.fcps.karel2.Display"/>
     <fullyQualifiedTypeName name="Lab11.Ball"/>
     <fullyQualifiedTypeName name="Lab11.Polkadot"/>
+    <fullyQualifiedTypeName name="java.awt.Color"/>
+    <fullyQualifiedTypeName name="java.lang.Math"/>
 </qualifiedTypeNameHistroy>

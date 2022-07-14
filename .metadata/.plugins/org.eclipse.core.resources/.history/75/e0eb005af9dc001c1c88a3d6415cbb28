@@ -1,0 +1,13 @@
+package Final;
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+public class panaladd {
+	public void startimg(Graphics myBuffer,int FRAME)
+    {
+		myBuffer.setColor(Color.WHITE);
+  	    myBuffer.fillRect(0,0,FRAME,FRAME);
+    }
+	
+}

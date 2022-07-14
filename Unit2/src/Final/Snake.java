@@ -1,0 +1,23 @@
+package Final;
+
+import javax.swing.JFrame;
+
+public class Snake {
+
+    //主函式
+    public static void main(String[] args) {
+     //創建一個新的 JFrame
+        JFrame frame = new JFrame("貪吃蛇");
+        frame.add(new Panel());
+        //不讓使用者自己調整視窗大小
+        frame.setResizable(false);
+        //pack()方法是要通知frame將其尺寸設定為可以將其內部所有的元件包起來的大小
+        frame.pack();
+        //設定 null 讓視窗出現在視窗中間
+        frame.setLocationRelativeTo(null);
+        //設定使用者點擊視窗的關閉按鈕時程式執行的操作
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //設定介面可見，一定要設定的東西
+        frame.setVisible(true);
+    }
+}

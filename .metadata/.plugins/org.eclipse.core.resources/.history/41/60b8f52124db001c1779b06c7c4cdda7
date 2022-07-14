@@ -1,0 +1,80 @@
+package game;
+
+   import javax.swing.*;
+
+import java.awt.*;
+   import java.awt.event.*;
+   import java.awt.image.*;
+   
+    public class MousePanel extends JPanel
+   {
+      private static final int FRAME = 800;
+      private static final Color BACKGROUND = new Color(204, 204, 204);
+      private BufferedImage myImage;
+      private Graphics myBuffer;
+      private Timer t; 
+
+		//constructor   
+       public MousePanel()
+      {
+    	   myImage =  new BufferedImage(FRAME, FRAME, BufferedImage.TYPE_INT_RGB);
+           myBuffer = myImage.getGraphics();
+           myBuffer.setColor(BACKGROUND);
+           myBuffer.fillRect(0, 0, FRAME,FRAME);
+           
+           int xPos = (int)(Math.random()*(FRAME-100) + 50);
+           int yPos = (int)(Math.random()*(FRAME-100)+ 50);
+           object ob = new object();
+           
+           t = new Timer(5, new Listener());
+           Timer txt = new Timer(10, new Listenertxt());
+           t.start();
+           
+           addMouseListener(new Mouse());
+      }
+       public void paintComponent(Graphics g)
+      {
+    	   g.drawImage(myImage, 0, 0, getWidth(), getHeight(), null);
+      }
+       private class Listener implements ActionListener{
+          public void actionPerformed(ActionEvent e){
+        	  myBuffer.setColor(BACKGROUND);
+              myBuffer.fillRect(0, 0, FRAME,FRAME);
+              
+              myBuffer.setColor(Color.black);
+              myBuffer.setFont(new Font("Monospaced",Font.BOLD,24));
+              myBuffer.drawString(" " , FRAME - 150, 25);
+              
+              repaint();
+          }
+      } 
+       
+       private class Listenertxt implements ActionListener{
+           public void actionPerformed(ActionEvent e){
+         	  myBuffer.setColor(BACKGROUND);
+               myBuffer.fillRect(0, 0, FRAME,FRAME);
+               
+               myBuffer.setColor(Color.black);
+               myBuffer.setFont(new Font("Monospaced",Font.BOLD,24));
+               myBuffer.drawString(" " , FRAME - 150, 25);
+               
+               repaint();
+           }
+       } 
+       
+       private void collide(){
+        
+		}
+      
+       
+       private double distance(double x1, double y1, double x2, double y2)
+      {
+         return Math.sqrt(Math.pow(x1-x2, 2)+Math.pow(y1-y2, 2));// enter the calculation here.
+      }
+       
+       private class Mouse extends MouseAdapter{
+       		public void mouseClicked(MouseEvent e) {
+       			
+       		}
+       }
+   }
